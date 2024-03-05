@@ -37,9 +37,12 @@ namespace csharplab.Application
             _lineCount = 0;
         }
 
-        public static FileProcess Create(string filePath, ITimerService timer, ISortService sortService)
+        public static FileProcess Create(ITimerService timer, ISortService sortService)
         {
-            if(string.IsNullOrEmpty(filePath))
+            Console.WriteLine("Enter full file path: ");
+            string? filePath = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(filePath))
             {
                 throw new ArgumentException("File path is empty");
             } else if(!File.Exists(filePath))

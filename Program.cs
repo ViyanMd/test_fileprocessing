@@ -7,9 +7,7 @@ namespace csharplab
     {
         static void Main(string[] args)
         {
-            string path = "10m.txt";
-
-            FileProcess fileProcess = FileProcess.Create(path, new TimerService(), new SortService());
+            FileProcess fileProcess = FileProcess.Create(new TimerService(), new SortService());
 
             fileProcess.Process();
             fileProcess.ShowResults();
