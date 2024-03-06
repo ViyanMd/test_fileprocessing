@@ -39,23 +39,25 @@ namespace csharplab.Application
 
         public static FileProcess Create(ITimerService timer, ISortService sortService)
         {
-            Console.WriteLine("Enter full file path: ");
+            Console.WriteLine("Enter full file path or press 'Enter' to use sample file: ");
             string? filePath = Console.ReadLine();
 
             if (string.IsNullOrEmpty(filePath))
             {
-                throw new ArgumentException("File path is empty");
-            } else if(!File.Exists(filePath))
+                filePath = "10m.txt";
+
+            }
+            else if (!File.Exists(filePath))
             {
                 throw new ArgumentException("File does not exist");
             }
 
-            if(timer == null)
+            if (timer == null)
             {
                 throw new ArgumentException("Timer is null");
             }
 
-            if(sortService == null)
+            if (sortService == null)
             {
                 throw new ArgumentException("SortService is null");
             }
@@ -65,7 +67,7 @@ namespace csharplab.Application
 
         public void Process()
         {
-            Console.WriteLine("Processing file: " + _filePath);
+            Console.WriteLine("\nProcessing file: " + _filePath);
 
             _timer.Start();
             using (StreamReader sr = new StreamReader(_filePath))
@@ -78,7 +80,7 @@ namespace csharplab.Application
                     current = int.Parse(currentLine);
 
                     _nums.Add(current);
-                    
+
                     SetMax(current);
                     SetMin(current);
 
@@ -100,13 +102,13 @@ namespace csharplab.Application
 
         private void SetMax(int num)
         {
-            if(num > _max)
+            if (num > _max)
                 _max = num;
         }
 
         private void SetMin(int num)
         {
-            if(num < _min)
+            if (num < _min)
                 _min = num;
         }
 
